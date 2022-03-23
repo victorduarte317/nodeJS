@@ -1,28 +1,25 @@
-let express = require('express');
 
-let routes = express.Router();
 
-routes.get('/', (req, res)=>{
+module.exports = (app)=>{
 
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({ // vai responder com json (express) no users e adicionar tudo dentro do bloco do users
-        users:[{
-                name: 'VICTOR',
-                email: 'VICTOR@EMAIL.COM',
-                id: 1
+    app.get('/users', (req, res)=>{ // método get (padrao)
+
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json({ // vai responder com json (express) no users e adicionar tudo dentro do bloco do users
+            
+            users:[{
+                    name: 'VICTOR',
+                    email: 'VICTOR@EMAIL.COM',
+                    id: 1
             }]
         });
-});
-
-routes.get('/admin', (req, res)=>{
-
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'application/json');
-    res.json({ // vai responder com json (express) no users e adicionar tudo dentro do bloco do users
-        users:[]
+    });
+    
+    app.post('/users', (req, res)=>{ // método post
+    
+        res.json(req.body); // vai exibir os campos enviados via post na solicitação
+    
     });
 
-});
-
-module.exports = routes;
+}
