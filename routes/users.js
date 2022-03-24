@@ -5,7 +5,7 @@ let db = new NeDB({ // instancia NeDB
     autoload:'true' // mao na roda
 });
 
-module.exports = (app)=>{
+module.exports = app =>{
 
     let route = app.route("/users");
 
@@ -68,12 +68,12 @@ module.exports = (app)=>{
 
     }); 
 
-    });
+});
 
     routeId.put((req, res) =>{ // usando put, pra colocar os dados la, usado pra alterar
 
         if (!app.utils.validator.user(app, req, res)) return false;
-        
+
         db.update({_id:req.params.id}, req.body, err =>{ // update recebe o mesmo filtro pra pegar o id, recebe os dados (nesse caso, req.body e a função de callback, nesse caso, o error
     
             if (err) {
@@ -81,7 +81,7 @@ module.exports = (app)=>{
                 app.utils.error.send(err, req, res);    
             } else {
 
-                res.status(200).json(Object.assign(req.body, req.params));
+                res.status(200).json(Object.assign(req.params, req.body));
             }
         });
     }); 
